@@ -1,3 +1,4 @@
+from exceptions.invalid_price_error import InvalidPriceError
 class Product:
     id: int
     name: str
@@ -46,7 +47,7 @@ class Product:
 
     def _validate_price(self, price) -> None:
         if price is None or price < 0:
-            raise ValueError("Price cannot be less than or equal to 0")
+            raise InvalidPriceError("Price cannot be less than or equal to 0")
 
     def _validate_stock(self, quantity) -> None:
         if quantity is None or quantity <= 0:

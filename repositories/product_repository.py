@@ -1,4 +1,5 @@
 from models.product import Product
+from exceptions import *
 
 class ProductRepository:
     products: list[Product]
@@ -23,7 +24,7 @@ class ProductRepository:
         for product in self.products:
             if product_id == product.id:
                 return product
-        raise Exception("Product Not Found")
+        raise ProductNotFoundError("Product Not Found")
 
     def _exists(self, product_id: int) -> bool:
         for product in self.products:
@@ -33,5 +34,5 @@ class ProductRepository:
 
     def _validate_duplicate_id(self, new_product_id: int) -> None:
         if self._exists(new_product_id):
-            raise Exception("You are trying to insert duplicate product")
+            raise DuplicateProductError("You are trying to insert duplicate product")
     
